@@ -3,7 +3,7 @@
 // single-file, então cacheando o index.html o jogo já funciona 100% offline
 // — inclusive gerando novos casos, já que o motor roda no cliente).
 // Bump o CACHE_NAME a cada release pra forçar os clientes a buscar de novo.
-const CACHE_NAME = "inspetor-thyago-v1.2";
+const CACHE_NAME = "inspetor-thyago-v1.3.1";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -34,6 +34,26 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const network = fetch(event.request)
+        .then((response) => {
+          // só cacheia respostas válidas do mesmo domínio (evita cachear erros/opacas de terceiros)
+          if (response && response.status === 200 && response.type === "basic") {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => cached); // offline: cai pro cache se a rede falhar
+
+      // cache-first: responde rápido do cache se existir, atualiza em segundo plano
+      return cached || network;
+    })
+  );
+});
   if (event.request.method !== "GET") return;
 
   event.respondWith(
