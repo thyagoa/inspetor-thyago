@@ -1,6 +1,6 @@
 {
   "name": "Inspetor Thyago",
-  "short_name": "Insp. Thyago",
+  "short_name": "Inspetor Thyago",
   "description": "Jogo de dedução lógica: use as pistas para descobrir onde cada suspeito estava e isolar o assassino.",
   "start_url": "./index.html",
   "scope": "./",
