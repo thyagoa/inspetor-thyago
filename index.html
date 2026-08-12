@@ -372,7 +372,7 @@
   .ghost{background:#eef1f5; color:var(--ink)}
   #accuseList{display:grid; grid-template-columns:1fr 1fr; gap:8px}
   #accuseList .chip{width:100%; justify-content:flex-start}
-  #resultSheet{text-align:center}
+  #resultSheet{text-align:center; padding:18px 18px 20px; overflow:auto}
   #resultSheet h2#resultTitle{margin:0 0 14px; font-size:21px}
   .resultGrid{
     display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:center;
@@ -3324,9 +3324,7 @@ generateAsync(7, "", "logic", c => startCase(c));
 /* registra o service worker pra funcionar offline e ser instalável */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {
-      /* falha silenciosa: o jogo funciona normalmente sem o SW, só não fica instalável/offline */
-    });
+    navigator.serviceWorker.register("sw.js").catch(() => {});
   });
 }
 </script>

@@ -3,7 +3,7 @@
 // single-file, então cacheando o index.html o jogo já funciona 100% offline
 // — inclusive gerando novos casos, já que o motor roda no cliente).
 // Bump o CACHE_NAME a cada release pra forçar os clientes a buscar de novo.
-const CACHE_NAME = "inspetor-thyago-v1.3.1";
+const CACHE_NAME = "inspetor-thyago-v1.3.2";
 const APP_SHELL = [
   "./",
   "./index.html",
